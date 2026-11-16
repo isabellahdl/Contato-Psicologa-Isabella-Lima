@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Isabella Lima · Psicóloga</title>
   <meta name="description" content="Isabella Lima, psicóloga. Agende sua conversa pelo WhatsApp.">
-  <link rel="icon" href="logo-ilustracao.png">
+  <link rel="icon" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -77,24 +77,19 @@
     .hero {
       margin: -40px -32px 0;
       padding: 44px 32px 26px;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(219,184,64,.28) 0, transparent 45%),
-        radial-gradient(circle at 80% 25%, rgba(190,128,89,.25) 0, transparent 45%),
-        linear-gradient(180deg, #f3ecd9, var(--card));
+      /* mesma cor do fundo da logo, para ela se encaixar sem moldura */
+      background: linear-gradient(180deg, #f4f5ef 0 70%, var(--card));
     }
     .logo {
-      width: 200px;
-      max-width: 70%;
+      width: 280px;   /* tamanho real da imagem: não estica nem distorce */
+      max-width: 100%;
       height: auto;
       display: block;
       margin: 0 auto 10px;
     }
-    h1 {
-      font-weight: 800;
-      font-size: 34px;
-      letter-spacing: .01em;
-      line-height: 1.05;
-      text-transform: uppercase;
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
     }
     .role {
       font-size: 19px;
@@ -187,7 +182,6 @@
       .card { padding: 32px 20px 26px; }
       .hero { margin: -32px -20px 0; padding: 40px 20px 22px; }
       .form-panel { margin: 26px -20px -26px; padding: 22px 20px 26px; }
-      h1 { font-size: 28px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .card { animation: none; }
@@ -203,9 +197,8 @@
 
   <main class="card">
     <div class="hero">
-    <img class="logo" src="logo-ilustracao.png" alt="Ilustração de uma poltrona, um divã e um balão de fala">
-    <h1>Isabella Lima</h1>
-    <p class="role">Psicóloga</p>
+    <img class="logo" src="logo.png" width="280" height="175" alt="Isabella Lima, Psicóloga">
+    <h1 class="sr-only">Isabella Lima, Psicóloga</h1>
     <p class="intro">Um espaço de escuta acolhedor e sem julgamentos. Vamos conversar?</p>
     </div>
 
