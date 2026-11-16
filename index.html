@@ -40,13 +40,15 @@
       position: fixed;
       border-radius: 50%;
       filter: blur(2px);
-      opacity: .16;
+      opacity: .55;
       pointer-events: none;
       z-index: 0;
     }
-    .blob.b1 { width: 340px; height: 300px; background: var(--mustard); top: -120px; left: -110px; border-radius: 60% 40% 55% 45%; }
+    .blob.b1 { width: 380px; height: 340px; background: var(--mustard); top: -120px; left: -110px; border-radius: 60% 40% 55% 45%; }
     .blob.b2 { width: 380px; height: 340px; background: var(--terracotta); bottom: -150px; right: -130px; border-radius: 45% 55% 40% 60%; }
-    .blob.b3 { width: 160px; height: 160px; background: var(--gray); top: 55%; left: -70px; }
+    .blob.b3 { width: 180px; height: 180px; background: var(--gray); top: 50%; left: -80px; opacity: .45; }
+    .blob.b4 { width: 120px; height: 120px; background: var(--mustard); bottom: 12%; right: 8%; opacity: .35; }
+    .blob.b5 { width: 90px; height: 90px; background: var(--terracotta); top: 12%; right: 10%; opacity: .3; }
 
     .card {
       position: relative;
@@ -59,6 +61,7 @@
       padding: 40px 32px 32px;
       text-align: center;
       box-shadow: 0 24px 50px -28px rgba(21, 21, 21, .25);
+      overflow: hidden;
       animation: rise .8s ease both;
     }
     @keyframes rise {
@@ -66,6 +69,19 @@
       to   { opacity: 1; transform: none; }
     }
 
+    .card::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 8px;
+      background: linear-gradient(90deg, var(--mustard) 0 33.3%, var(--terracotta) 33.3% 66.6%, var(--gray) 66.6%);
+    }
+    .hero {
+      margin: -40px -32px 0;
+      padding: 44px 32px 26px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(219,184,64,.28) 0, transparent 45%),
+        radial-gradient(circle at 80% 25%, rgba(190,128,89,.25) 0, transparent 45%),
+        linear-gradient(180deg, #f3ecd9, var(--card));
+    }
     .logo {
       width: 200px;
       max-width: 70%;
@@ -82,8 +98,9 @@
     }
     .role {
       font-size: 19px;
-      font-weight: 400;
+      font-weight: 500;
       margin-top: 4px;
+      color: var(--terracotta-dark);
     }
     .intro {
       margin: 22px auto 0;
@@ -118,17 +135,23 @@
     .btn:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
     .btn:focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; }
     .btn svg { width: 22px; height: 22px; fill: currentColor; }
-    .btn.secondary { background: var(--ink); }
-    .btn.secondary:hover { background: #333; }
+    .btn.secondary { background: var(--mustard); color: var(--ink); }
+    .btn.secondary:hover { background: #c9a630; }
 
     .section-title {
       font-size: 13px;
       font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--terracotta-dark);
     }
 
+    .form-panel {
+      margin: 30px -32px -32px;
+      padding: 26px 32px 30px;
+      background: linear-gradient(180deg, rgba(219,184,64,.16), rgba(190,128,89,.12));
+      border-top: 1px solid var(--line);
+    }
     form { text-align: left; margin-top: 6px; }
     label {
       display: block;
@@ -139,7 +162,7 @@
     input, textarea {
       width: 100%;
       padding: 13px 15px;
-      border: 1.5px solid var(--line);
+      border: 1.5px solid #e2d6bd;
       border-radius: 12px;
       background: #fff;
       color: var(--ink);
@@ -162,6 +185,8 @@
 
     @media (max-width: 420px) {
       .card { padding: 32px 20px 26px; }
+      .hero { margin: -32px -20px 0; padding: 40px 20px 22px; }
+      .form-panel { margin: 26px -20px -26px; padding: 22px 20px 26px; }
       h1 { font-size: 28px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -173,12 +198,16 @@
   <div class="blob b1"></div>
   <div class="blob b2"></div>
   <div class="blob b3"></div>
+  <div class="blob b4"></div>
+  <div class="blob b5"></div>
 
   <main class="card">
+    <div class="hero">
     <img class="logo" src="logo-ilustracao.png" alt="Ilustração de uma poltrona, um divã e um balão de fala">
     <h1>Isabella Lima</h1>
     <p class="role">Psicóloga</p>
     <p class="intro">Um espaço de escuta acolhedor e sem julgamentos. Vamos conversar?</p>
+    </div>
 
     <div class="divider" aria-hidden="true"><i></i><i></i><i></i></div>
 
@@ -187,7 +216,8 @@
       Agendar pelo WhatsApp
     </a>
 
-    <p class="section-title" style="margin-top:30px">ou envie uma mensagem</p>
+    <div class="form-panel">
+    <p class="section-title">ou envie uma mensagem</p>
 
     <form id="wpp-form">
       <label for="nome">Seu nome</label>
@@ -200,6 +230,7 @@
     </form>
 
     <footer>© Isabella Lima · Psicóloga</footer>
+    </div>
   </main>
 
   <script>
