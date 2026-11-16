@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fale com a Isa</title>
+  <meta name="description" content="Entre em contato com a Isa pelo WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fdf6f4;
+      --bg-2: #f8e6e3;
+      --card: rgba(255, 255, 255, 0.78);
+      --text: #5a3e45;
+      --muted: #9a7b82;
+      --rose: #d98c9a;
+      --rose-dark: #c06f7f;
+      --gold: #c9a77c;
+      --line: #eed7d3;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: "Nunito", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, #fbdfe2 0, transparent 40%),
+        radial-gradient(circle at 85% 90%, #f3e3d3 0, transparent 45%),
+        linear-gradient(160deg, var(--bg), var(--bg-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      overflow-x: hidden;
+    }
+
+    /* pétalas flutuando */
+    .petal {
+      position: fixed;
+      top: -40px;
+      width: 14px; height: 18px;
+      background: linear-gradient(135deg, #f6c6cf, #e9a3b1);
+      border-radius: 80% 0 80% 0;
+      opacity: .55;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh) translateX(60px) rotate(360deg); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 440px;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 44px 32px 36px;
+      text-align: center;
+      box-shadow: 0 20px 50px -20px rgba(192, 111, 127, .35);
+      animation: rise .9s ease both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .avatar {
+      width: 112px; height: 112px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--rose), var(--gold));
+    }
+    .avatar span {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: #fff8f6;
+      font-family: "Great Vibes", cursive;
+      font-size: 54px;
+      color: var(--rose-dark);
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: 54px;
+      line-height: 1.05;
+      color: var(--rose-dark);
+    }
+    .subtitle {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 24px 0;
+      color: var(--gold);
+      font-size: 14px;
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+      color: #fff;
+      font: 600 17px "Nunito", sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 10px 24px -10px rgba(192, 111, 127, .7);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -10px rgba(192, 111, 127, .8); }
+    .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .btn svg { width: 22px; height: 22px; fill: currentColor; }
+
+    form { text-align: left; margin-top: 4px; }
+    label {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 14px 0 6px 4px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffdfc;
+      color: var(--text);
+      font: 16px "Nunito", sans-serif;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    textarea { resize: vertical; min-height: 96px; }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(217, 140, 154, .18);
+    }
+    form .btn { margin-top: 20px; }
+
+    footer {
+      margin-top: 26px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer .heart { color: var(--rose); }
+
+    @media (max-width: 420px) {
+      .card { padding: 36px 20px 28px; }
+      h1 { font-size: 46px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .petal { display: none; }
+      .card { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <div class="avatar"><span>I</span></div>
+    <h1>Olá, sou a Isa</h1>
+    <p class="subtitle">Vai ser um prazer conversar com você ♡</p>
+
+    <div class="divider">✿</div>
+
+    <a id="wpp-direct" class="btn" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.9 10 5.1 16 5.1s11 4.8 11 10.7-5 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.6-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 2-.8 2.2-1.6.3-.8.3-1.4.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>
+      Chamar no WhatsApp
+    </a>
+
+    <div class="divider">ou deixe sua mensagem</div>
+
+    <form id="wpp-form">
+      <label for="nome">Seu nome</label>
+      <input id="nome" name="nome" type="text" placeholder="Como posso te chamar?" autocomplete="name" required>
+
+      <label for="mensagem">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" placeholder="Conte um pouquinho sobre o que você precisa…" required></textarea>
+
+      <button class="btn" type="submit">Enviar pelo WhatsApp ♡</button>
+    </form>
+
+    <footer>Feito com <span class="heart">♥</span> pela Isa</footer>
+  </main>
+
+  <script>
+    // ✏️ Troque pelo seu número: código do país + DDD + número, só dígitos (ex.: 5511999998888)
+    const WHATSAPP_NUMBER = "5500000000000";
+    const DEFAULT_MESSAGE = "Oi, Isa! Vim pelo seu site 🌸";
+
+    const waLink = (text) =>
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
+    document.getElementById("wpp-direct").href = waLink(DEFAULT_MESSAGE);
+
+    document.getElementById("wpp-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nome = document.getElementById("nome").value.trim();
+      const msg = document.getElementById("mensagem").value.trim();
+      const texto = `Oi, Isa! Meu nome é ${nome} 🌸\n\n${msg}`;
+      window.open(waLink(texto), "_blank", "noopener");
+    });
+
+    // pétalas
+    for (let i = 0; i < 14; i++) {
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.animationDuration = 9 + Math.random() * 10 + "s";
+      p.style.animationDelay = -Math.random() * 15 + "s";
+      p.style.transform = `scale(${0.6 + Math.random() * 0.8})`;
+      document.body.appendChild(p);
+    }
+  </script>
+</body>
+</html>
